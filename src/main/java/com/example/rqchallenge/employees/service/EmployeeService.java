@@ -11,14 +11,14 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class EmployeeService {
+public class EmployeeService implements EmployeeServiceInterface {
     Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
     @Autowired
     EmployeeRepo employeeRepo;
 
-    public Employee getEmployeeDetails(int empId) {
-        return employeeRepo.findById(empId).orElse(null);
+    public Employee getEmployeeDetails(int employeeId) {
+        return employeeRepo.findById(employeeId).orElse(null);
     }
 
     public List<Employee> getAll() {
@@ -31,19 +31,19 @@ public class EmployeeService {
         return employeeRepo.save(employee);
     }
 
-    public boolean deleteEmployee(int id) {
-        if (getEmployeeDetails(id) != null) {
-            employeeRepo.deleteById(id);
-            logger.info("[deleteEmployee] Successfully deleted employee with record id= " + id);
+    public boolean deleteEmployee(int employeeId) {
+        if (getEmployeeDetails(employeeId) != null) {
+            employeeRepo.deleteById(employeeId);
+            logger.info("[deleteEmployee] Successfully deleted employee with record id= " + employeeId);
             return true;
         } else {
-            logger.error("[deleteEmployee] Invalid parameters passed id= " + id);
+            logger.error("[deleteEmployee] Invalid parameters passed id= " + employeeId);
             return false;
         }
     }
 
-    public List<Employee> getEmployeesByNameSearch(String name) {
-        List<Employee> list = employeeRepo.findByEmployeeNameLike(name);
+    public List<Employee> getEmployeesByNameSearch(String employeeName) {
+        List<Employee> list = employeeRepo.findByEmployeeNameLike(employeeName);
         return list == null ? Collections.emptyList() : list;
     }
 
