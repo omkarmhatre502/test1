@@ -8,10 +8,11 @@ public class EmployeeException {
     private String message;
     private HttpStatus httpStatus;
 
-    public EmployeeException(){
+    public EmployeeException() {
 
     }
-    public EmployeeException(String message,HttpStatus httpStatus){
+
+    public EmployeeException(String message, HttpStatus httpStatus) {
         this.httpStatus = httpStatus;
         this.message = message;
 
